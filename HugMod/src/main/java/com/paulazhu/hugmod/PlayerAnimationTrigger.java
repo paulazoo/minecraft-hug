@@ -21,7 +21,7 @@ public class PlayerAnimationTrigger {
     @SubscribeEvent
     public static void onChatReceived(ClientChatReceivedEvent event) {
         //Test if it is a player (main or other) and the message
-        if (event.getMessage().contains(Component.literal("waving"))) {
+        if (event.getMessage().contains(Component.literal("hug"))) {
             //Get the player from Minecraft, using the chat profile ID. From network packets, you'll receive entity IDs instead of UUIDs
             var player = Minecraft.getInstance().level.getPlayerByUUID(event.getSender());
 
@@ -33,7 +33,7 @@ public class PlayerAnimationTrigger {
                 //You can set an animation from anywhere ON THE CLIENT
                 //Do not attempt to do this on a server, that will only fail
 
-                animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "waving"))));
+                animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "hugging"))));
                 //You might use  animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
                 //See javadoc for details
             }
