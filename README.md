@@ -1,5 +1,5 @@
 # General:
-Minecraft mod to hug players written in Java by Paula Zhu.
+Minecraft mod to hug players written in Java with Forge Gradle by Paula Zhu.
 
 # To run in dev:
 - close IntelliJ
@@ -7,7 +7,15 @@ Minecraft mod to hug players written in Java by Paula Zhu.
 - `./gradlew genIntellijRuns`
 - `./gradlew runClient`
 
-# Dev Reqs:
+# Reqs:
+
+## Mod dependencies:
+- Forge duh.
+- KosmX/minecraftPlayerAnimator library!
+    - is included on build
+    - implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:0.4.0")
+
+## Dev Environment Reqs:
 - JDK 17 (must be Java 17)
 - IntelliJ IDE
     - education license/email gives Ultimate for free
