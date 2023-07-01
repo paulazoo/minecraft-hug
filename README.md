@@ -1,5 +1,6 @@
 # General:
 Minecraft mod to hug players written in Java with Forge Gradle by Paula Zhu.
+- note that animations are built client-side
 
 # To run in dev:
 - close IntelliJ
@@ -28,4 +29,4 @@ Minecraft mod to hug players written in Java with Forge Gradle by Paula Zhu.
 - make default: export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`
 - java -version
 
-## DOES NOT WORK WITH FORGE 1.20 MDK
+## DOES NOT WORK WITH FORGE 1.20
