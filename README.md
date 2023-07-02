@@ -10,6 +10,8 @@ Hugging increases the hugged player's health by 1 heart
 - `cd /path/to/mod/folder`
 - `./gradlew genIntellijRuns`
 - `./gradlew runClient`
+- `./gradlew build`
+    - jar file in build/libs/
 
 # Currently working with (230701):
 - minecraft 1.19.3
