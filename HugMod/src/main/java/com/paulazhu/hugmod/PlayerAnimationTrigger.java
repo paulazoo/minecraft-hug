@@ -8,8 +8,11 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.EntityGetter;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -45,9 +48,19 @@ public class PlayerAnimationTrigger {
             AABB aABB = selfPlayer.getBoundingBox().expandTowards(vec32.scale(d)).inflate(1.0D, 1.0D, 1.0D);
             EntityHitResult entHit = ProjectileUtil.getEntityHitResult(selfPlayer, vec3, vec33, aABB,
                     en -> (!en.isSpectator()), d);
-            if(entHit != null && (entHit.getEntity().getType() == EntityType.VILLAGER)) {
-                //var otherPlayer = Minecraft.getInstance().level.getPlayerByUUID();
-                //if (otherPlayer == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
+            if(entHit != null && (entHit.getEntity().getType() == EntityType.PLAYER)) {
+                var otherPlayerUUID = entHit.getEntity().getUUID();
+                var otherPlayer = Minecraft.getInstance().level.getPlayerByUUID(otherPlayerUUID);
+                if (otherPlayer == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
+                if (otherPlayer.getHealth() == 20) {
+                }
+                else {
+                    int heartHealAmount = 2;
+                    int health = (int) (otherPlayer.getHealth() + heartHealAmount);
+
+                    otherPlayer.setHealth(Math.min(health, 20));
+                }
+
 
                 var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "animation"));
                 if (animation != null) {

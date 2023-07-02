@@ -8,8 +8,8 @@
     "isLoop": "false",
     "returnTick": 28,
     "beginTick":0,
-    "endTick":60,
-    "stopTick":61,
+    "endTick":40,
+    "stopTick":41,
     "degrees":false,
     "moves":[
 
