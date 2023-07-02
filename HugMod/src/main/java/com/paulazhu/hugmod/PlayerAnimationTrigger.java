@@ -7,38 +7,60 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import com.paulazhu.hugmod.PlayerData;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+
 @Mod.EventBusSubscriber(modid = HugMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class PlayerAnimationTrigger {
-    //We need to know when to play an animation
-    //This can be anything depending on your ideas (see Emotecraft, BetterCombat ...)
+
     @SubscribeEvent
-    public static void onChatReceived(ClientChatReceivedEvent event) {
-        //Test if it is a player (main or other) and the message
-        if (event.getMessage().contains(Component.literal("hug"))) {
-            //Get the player from Minecraft, using the chat profile ID. From network packets, you'll receive entity IDs instead of UUIDs
-            var player = Minecraft.getInstance().level.getPlayerByUUID(event.getSender());
+    public static void onHugKeyPressed(InputEvent.Key event) {
+        if (Minecraft.getInstance().options.keySwapOffhand.isDown()) {
 
-            if (player == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
+            var selfPlayer = Minecraft.getInstance().player;
+            if (selfPlayer == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
 
-            //Get the animation for that player
-            var animation = (ModifierLayer<IAnimation>)PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) player).get(new ResourceLocation(HugMod.MODID, "animation"));
-            if (animation != null) {
-                //You can set an animation from anywhere ON THE CLIENT
-                //Do not attempt to do this on a server, that will only fail
+            double d = 1;//range
+            Vec3 vec3 = selfPlayer.getEyePosition(0);
+            Vec3 vec32 = selfPlayer.getViewVector(1.0F);
+            Vec3 vec33 = vec3.add(vec32.x * d, vec32.y * d, vec32.z * d);
+            AABB aABB = selfPlayer.getBoundingBox().expandTowards(vec32.scale(d)).inflate(1.0D, 1.0D, 1.0D);
+            EntityHitResult entHit = ProjectileUtil.getEntityHitResult(selfPlayer, vec3, vec33, aABB,
+                    en -> (!en.isSpectator()), d);
+            if(entHit != null && (entHit.getEntity().getType() == EntityType.VILLAGER)) {
+                //var otherPlayer = Minecraft.getInstance().level.getPlayerByUUID();
+                //if (otherPlayer == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
 
-                animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "hugging"))));
-                //You might use  animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
-                //See javadoc for details
+                var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "animation"));
+                if (animation != null) {
+                    animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "hugging"))));
+                    //You might use  animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
+                    //See javadoc for details
+                }
             }
         }
+
     }
 
     //For server-side animation playing, see Emotecraft API
 }
+
+
