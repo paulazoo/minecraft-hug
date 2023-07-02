@@ -2,7 +2,8 @@
 Minecraft mod to hug players written in Java with Forge Gradle by Paula Zhu.
 - note that animations are built client-side
 
-Press GLFW_KEY_H   72 to use
+Press keySwapOffHand empty handed while standing right in front of another player to use
+Hugging increases the hugged player's health by 1 heart
 
 # To run in dev:
 - close IntelliJ
