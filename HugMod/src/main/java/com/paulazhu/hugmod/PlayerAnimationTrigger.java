@@ -11,9 +11,6 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.AirItem;
-import net.minecraft.world.level.block.AirBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -45,7 +42,7 @@ public class PlayerAnimationTrigger {
 
             // entity is within hugging hit box
             if(entHit != null) {
-                isHugging = !isHugging;
+                isHugging = true;
                 System.out.println(isHugging);
                 // increase other player's health
                 if (entHit.getEntity().getType() == EntityType.PLAYER) {
@@ -77,7 +74,6 @@ public class PlayerAnimationTrigger {
                     //You might use animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
                     //See javadoc for details
                 }
-                //isHugging = false;
             }
 
 
