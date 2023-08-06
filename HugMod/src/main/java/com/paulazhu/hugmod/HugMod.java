@@ -17,6 +17,15 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationFactory;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 
+import net.minecraftforge.client.event.RenderArmEvent;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.client.model.PlayerModel;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HugMod.MODID)
