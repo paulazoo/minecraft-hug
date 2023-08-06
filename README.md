@@ -1,13 +1,15 @@
 # General:
-Minecraft mod to hug players written in Java with Forge Gradle by Paula Zhu.
+Minecraft mod to hug players and animals and other entities written in Java with Forge Gradle by Paula Zhu.
 - note that animations are built client-side
 - https://www.curseforge.com/minecraft/mc-mods/hug-mod
 
 # Use
 - jar file in build/libs/
-- Press keySwapOffHand while empty handed
-- Must be standing right in front of another player to use
-- Hugging increases the hugged player's health by 1 heart
+- Press keySwapOffHand while empty handed to use
+- Must be standing right in front of another entity to use
+- To hug shorter animals, try using sneak and looking down at them
+- Hugging increases the health of the player actively doing the hugging by 1/2 of a heart
+- Being hugged increases a player's health by 1 heart
 
 # To run in dev:
 - don't need to close IntelliJ
