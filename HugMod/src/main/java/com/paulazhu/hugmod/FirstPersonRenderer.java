@@ -15,6 +15,8 @@ import net.minecraftforge.client.event.RenderArmEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 
 import com.paulazhu.hugmod.PlayerAnimationTrigger;
 
@@ -39,22 +41,26 @@ public class FirstPersonRenderer {
             return;
 
         PlayerModel<AbstractClientPlayer> model = pr.getModel();
-        model.setAllVisible(true);
+        //model.setAllVisible(true);
         model.attackTime = 0.0F;
         model.crouching = false;
         model.swimAmount = 0.0F;
         model.setupAnim(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
         // rendering whatever arm is not the main arm, so that ultimately both arms are rendered for hugging
-        ModelPart armPart = event.getArm() == HumanoidArm.LEFT ? model.rightSleeve : model.leftSleeve;
-        System.out.println(event.getArm());
-        System.out.println(armPart);
+        //ModelPart armPart = event.getArm() == HumanoidArm.LEFT ? model.rightSleeve : model.leftSleeve;
+        ModelPart leftArmPart = model.leftSleeve;
+        ModelPart rightArmPart = model.rightSleeve;
+        System.out.println(leftArmPart.visible);
+        System.out.println(rightArmPart.visible);
         System.out.println(event.getPoseStack());
         System.out.println(event.getMultiBufferSource().getBuffer(RenderType.solid()));
         System.out.println(event.getPackedLight());
-        armPart.xRot = 0.0F;
+        //armPart.xRot = 0.0F;
         // armPart.render(event.getPoseStack(), buffer.getBuffer(RenderType.entitySolid(ARM_PNG_LOCATION)),
         //        LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
-        armPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.solid()), event.getPackedLight(), OverlayTexture.NO_OVERLAY);
+        leftArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.lines()), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+        event.setCanceled(true);
+        rightArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.lines()), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
         event.setCanceled(true);
     }
 
