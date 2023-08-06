@@ -32,8 +32,12 @@ public class PlayerAnimationTrigger {
             if (selfPlayer == null) return; //The player can be null because it was a system message or because it is not loaded by this player.
             if (selfPlayer.getOffhandItem().getItem() != Item.byId(0) && selfPlayer.getOffhandItem().getItem() != null) return;
 
-            double d = 1;//range
+            double d = 1; // distance range for hugging hit box
             Vec3 vec3 = selfPlayer.getEyePosition(0);
+            //if (selfPlayer.isCrouching()) {
+            //    vec3 = selfPlayer.getEyePosition(0);
+            //    System.out.println(vec3);
+            //}
             Vec3 vec32 = selfPlayer.getViewVector(1.0F);
             Vec3 vec33 = vec3.add(vec32.x * d, vec32.y * d, vec32.z * d);
             AABB aABB = selfPlayer.getBoundingBox().expandTowards(vec32.scale(d)).inflate(1.0D, 1.0D, 1.0D);
@@ -43,7 +47,7 @@ public class PlayerAnimationTrigger {
             // entity is within hugging hit box
             if(entHit != null) {
                 isHugging = true;
-                System.out.println(isHugging);
+
                 // increase other player's health
                 if (entHit.getEntity().getType() == EntityType.PLAYER) {
                     var otherPlayerUUID = entHit.getEntity().getUUID();
@@ -58,10 +62,10 @@ public class PlayerAnimationTrigger {
                     }
                 }
 
-                // increase your own health; CHANGEME
+                // increase your own health
                 if (selfPlayer.getHealth() == 20) {
                 } else {
-                    int heartHealAmount = 2;
+                    int heartHealAmount = 1;
                     int health = (int) (selfPlayer.getHealth() + heartHealAmount);
 
                     selfPlayer.setHealth(Math.min(health, 20));

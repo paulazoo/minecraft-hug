@@ -30,11 +30,8 @@ public class FirstPersonRenderer {
         if (!PlayerAnimationTrigger.isHugging) {
             return;
         } else {
-            System.out.println("hug timer starting");
-
             //otherwise increment counter
             tickTime++; // 1 minecraft tick = 50 ms supposedly
-            System.out.println(tickTime);
             if (tickTime > 200) {
                 PlayerAnimationTrigger.isHugging = false;
                 tickTime = 0;
@@ -67,10 +64,11 @@ public class FirstPersonRenderer {
         leftArmPart.x = 5.0F; // negative is up
         leftArmPart.y = -5.0F; // positive is outward
         leftArmPart.z = -20.0F; // positive is rightward
-        leftArmPart.yRot = 1.5F;
+        leftArmPart.yRot = 2.2F; // positive is clockwise
+        rightArmPart.yRot = -1.0F;
 
-        leftArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.solid()), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
-        rightArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.solid()), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+        leftArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(player.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+        rightArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(player.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
         event.setCanceled(true);
     }
 
