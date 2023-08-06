@@ -32,7 +32,7 @@ public class FirstPersonRenderer {
         } else {
             //otherwise increment counter
             tickTime++; // 1 minecraft tick = 50 ms supposedly
-            if (tickTime > 200) {
+            if (tickTime > 200) { // about 4 s
                 PlayerAnimationTrigger.isHugging = false;
                 tickTime = 0;
             }

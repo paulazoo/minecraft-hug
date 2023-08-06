@@ -20,7 +20,7 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - `./gradlew build`
     - jar file in build/libs/
 
-# Currently working with (230701):
+# Currently working with (230806):
 - minecraft 1.19.3
 - forge 44.1.0
     - https://nekoyue.github.io/ForgeJavaDocs-NG/
