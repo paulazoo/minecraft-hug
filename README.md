@@ -56,3 +56,4 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - dependencies:
     - change forge
     - https://maven.kosmx.dev/dev/kosmx/player-anim/
+    - mods.toml versionRange
