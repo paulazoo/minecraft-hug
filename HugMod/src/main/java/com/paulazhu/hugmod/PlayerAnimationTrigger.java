@@ -54,8 +54,7 @@ public class PlayerAnimationTrigger {
                     var otherPlayer = Minecraft.getInstance().level.getPlayerByUUID(otherPlayerUUID);
                     if (otherPlayer == null)
                         return; //The player can be null because it was a system message or because it is not loaded by this player.
-                    if (otherPlayer.getHealth() == 20) {
-                    } else {
+                    if (otherPlayer.getHealth() != 20) {
                         int heartHealAmount = 2;
                         int health = (int) (otherPlayer.getHealth() + heartHealAmount);
                         otherPlayer.setHealth(Math.min(health, 20));
@@ -63,8 +62,7 @@ public class PlayerAnimationTrigger {
                 }
 
                 // increase your own health
-                if (selfPlayer.getHealth() == 20) {
-                } else {
+                if (selfPlayer.getHealth() != 20) {
                     int heartHealAmount = 1;
                     int health = (int) (selfPlayer.getHealth() + heartHealAmount);
 
@@ -72,9 +70,9 @@ public class PlayerAnimationTrigger {
                 }
 
                 // run third person hugging animation
-                var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "animation"));
+                var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "hugging"));
                 if (animation != null) {
-                    animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "hugging"))));
+                    animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation(HugMod.MODID, "hugging"))));
                     //You might use animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
                     //See javadoc for details
                 }

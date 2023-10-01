@@ -51,4 +51,8 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - make default: export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`
 - java -version
 
-## DOES NOT WORK WITH FORGE 1.20
+## UPDATING TO FORGE 1.20
+- change mappings to 1.20
+- dependencies:
+    - change forge
+    - https://maven.kosmx.dev/dev/kosmx/player-anim/
