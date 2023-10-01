@@ -20,9 +20,9 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - `./gradlew build`
     - jar file in build/libs/
 
-# Currently working with (230806):
-- minecraft 1.19.3
-- forge 44.1.0
+# Currently working with (231001):
+- minecraft 1.20
+- forge 46.0.12
     - https://nekoyue.github.io/ForgeJavaDocs-NG/
 - Java 17.0.7
 - gradle 7.4.2
@@ -33,7 +33,7 @@ Minecraft mod to hug players and animals and other entities written in Java with
 # Reqs:
 
 ## Mod dependencies:
-- Forge 1.19.3
+- Forge 1.20
 - KosmX/minecraftPlayerAnimator library!
     - is included on build
     - implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:0.4.0")
@@ -42,7 +42,7 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - JDK 17 (must be Java 17)
 - IntelliJ IDE
     - education license/email gives Ultimate for free
-- Forge 1.19.3 MDK
+- Forge 1.20 46.0.12 MDK
 
 # Troubleshooting 230630:
 
@@ -51,7 +51,7 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - make default: export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`
 - java -version
 
-## UPDATING TO FORGE 1.20
+## UPDATING TO FORGE 1.20 (231001)
 - change mappings to 1.20
 - dependencies:
     - change forge
