@@ -1,5 +1,7 @@
-package com.paulazhu.hugmod;
+package com.paulazhu.hugmod.localanimations;
 
+import com.paulazhu.hugmod.HugMod;
+import com.paulazhu.hugmod.event.ClientEvents;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
@@ -16,10 +18,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraft.client.renderer.LightTexture;
-
-import com.paulazhu.hugmod.PlayerAnimationTrigger;
 
 @Mod.EventBusSubscriber(modid = HugMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class FirstPersonRenderer {
@@ -27,13 +26,13 @@ public class FirstPersonRenderer {
 
     @SubscribeEvent
     public static void onTick(TickEvent event) {
-        if (!PlayerAnimationTrigger.isHugging) {
+        if (!ClientEvents.isHugging) {
             return;
         } else {
             //otherwise increment counter
             tickTime++; // 1 minecraft tick = 50 ms supposedly
             if (tickTime > 200) { // about 4 s
-                PlayerAnimationTrigger.isHugging = false;
+                ClientEvents.isHugging = false;
                 tickTime = 0;
             }
         }
@@ -41,14 +40,14 @@ public class FirstPersonRenderer {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderPlayerHand(RenderArmEvent event) {
-        if (!PlayerAnimationTrigger.isHugging || Minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON)
+        if (!ClientEvents.isHugging || Minecraft.getInstance().options.getCameraType() != CameraType.FIRST_PERSON)
             return;
 
         Minecraft mc = Minecraft.getInstance();
-        LocalPlayer player = mc.player;
+        LocalPlayer selfPlayer = mc.player;
         MultiBufferSource buffer = event.getMultiBufferSource();
         if (!(mc.getEntityRenderDispatcher()
-                .getRenderer(player) instanceof PlayerRenderer pr))
+                .getRenderer(selfPlayer) instanceof PlayerRenderer pr))
             return;
 
         PlayerModel<AbstractClientPlayer> model = pr.getModel();
@@ -56,7 +55,7 @@ public class FirstPersonRenderer {
         model.attackTime = 0.0F;
         model.crouching = false;
         model.swimAmount = 0.0F;
-        model.setupAnim(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        model.setupAnim(selfPlayer, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
 
         ModelPart leftArmPart = model.leftArm;
         ModelPart rightArmPart = model.rightArm;
@@ -67,8 +66,8 @@ public class FirstPersonRenderer {
         leftArmPart.yRot = 2.2F; // positive is clockwise
         rightArmPart.yRot = -1.0F;
 
-        leftArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(player.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
-        rightArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(player.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+        leftArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(selfPlayer.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
+        rightArmPart.render(event.getPoseStack(), event.getMultiBufferSource().getBuffer(RenderType.entitySolid(selfPlayer.getSkinTextureLocation())), LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
         event.setCanceled(true);
     }
 

@@ -1,7 +1,9 @@
 package com.paulazhu.hugmod;
 
 import com.mojang.logging.LogUtils;
+import com.paulazhu.hugmod.networking.ModMessages;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,14 +37,14 @@ public class HugMod
     private static final Logger LOGGER = LogUtils.getLogger(); // Directly reference a slf4j logger
     public HugMod()
     {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus(); //final?
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup); // Register the commonSetup method for modloading
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        ModMessages.register();
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
