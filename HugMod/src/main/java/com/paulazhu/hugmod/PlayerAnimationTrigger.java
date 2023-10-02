@@ -70,9 +70,9 @@ public class PlayerAnimationTrigger {
                 }
 
                 // run third person hugging animation
-                var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "hugging"));
+                var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) selfPlayer).get(new ResourceLocation(HugMod.MODID, "animation"));
                 if (animation != null) {
-                    animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation(HugMod.MODID, "hugging"))));
+                    animation.setAnimation(new KeyframeAnimationPlayer(PlayerAnimationRegistry.getAnimation(new ResourceLocation("hugmod", "hugging"))));
                     //You might use animation.replaceAnimationWithFade(); to create fade effect instead of sudden change
                     //See javadoc for details
                 }

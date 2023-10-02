@@ -2,6 +2,7 @@
 Minecraft mod to hug players and animals and other entities written in Java with Forge Gradle by Paula Zhu.
 - note that animations are built client-side
 - https://www.curseforge.com/minecraft/mc-mods/hug-mod
+- MOD DEPENDENCY: https://modrinth.com/mod/playeranimator/version/1.0.2-rc1+1.20-forge
 
 # Use
 - jar file in build/libs/
@@ -13,7 +14,7 @@ Minecraft mod to hug players and animals and other entities written in Java with
 
 # To run in dev:
 - don't need to close IntelliJ
-- `cd /path/to/mod/folder`
+- `cd ./HugMod`
 - `./gradlew genIntellijRuns`
     - if doesn't work may need to rerun the build.gradle
 - `./gradlew runClient`
