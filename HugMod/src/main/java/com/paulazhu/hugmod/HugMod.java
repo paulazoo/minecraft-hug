@@ -47,7 +47,7 @@ public class HugMod
             PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(
                     new ResourceLocation(MODID, "animation"),
                     42,
-                    HugMod::ClientInit.registerPlayerAnimation);
+                    HugMod::registerPlayerAnimation);
         }
     }
 
