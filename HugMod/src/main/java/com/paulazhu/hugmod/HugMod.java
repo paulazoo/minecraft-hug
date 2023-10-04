@@ -2,6 +2,7 @@ package com.paulazhu.hugmod;
 
 import com.mojang.logging.LogUtils;
 import com.paulazhu.hugmod.networking.ModMessages;
+import com.paulazhu.hugmod.ClientInit;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -58,14 +59,13 @@ public class HugMod
             PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(
                     new ResourceLocation(MODID, "animation"),
                     42,
-                    HugMod::registerPlayerAnimation);
+                    HugMod::ClientInit.registerPlayerAnimation);
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    //This method will set your mods animation into the library.
     private static IAnimation registerPlayerAnimation(AbstractClientPlayer player) {
         //This will be invoked for every new player
         return new ModifierLayer<>();
     }
+
 }
