@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 public class HugC2SPacket {
     private static final String MESSAGE_HUG_SOMEONE = "*hug*";
+    private static final String MESSAGE_GOT_HUGGED = "*hug* received";
     public final UUID entityHuggedUUID;
 
     public HugC2SPacket(UUID clientEntityHuggedUUID) {
@@ -61,6 +62,7 @@ public class HugC2SPacket {
                     float heartHealAmount = 2;
                     float health = (float) (huggedPlayer.getHealth() + heartHealAmount);
                     huggedPlayer.setHealth(Math.min(health, 20));
+                    huggedPlayer.sendSystemMessage(Component.translatable(MESSAGE_GOT_HUGGED).withStyle(ChatFormatting.YELLOW));
                 }
             } else if (huggedEntity.getType() == EntityType.VILLAGER) {
                 // increase villager's health
