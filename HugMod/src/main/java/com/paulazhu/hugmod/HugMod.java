@@ -2,8 +2,6 @@ package com.paulazhu.hugmod;
 
 import com.mojang.logging.LogUtils;
 import com.paulazhu.hugmod.networking.ModMessages;
-import com.paulazhu.hugmod.ClientInit;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,16 +17,6 @@ import dev.kosmx.playerAnim.api.layered.ModifierLayer;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationFactory;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
-
-import net.minecraftforge.client.event.RenderArmEvent;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.client.model.PlayerModel;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HugMod.MODID)
@@ -61,11 +49,6 @@ public class HugMod
                     42,
                     HugMod::ClientInit.registerPlayerAnimation);
         }
-    }
-
-    private static IAnimation registerPlayerAnimation(AbstractClientPlayer player) {
-        //This will be invoked for every new player
-        return new ModifierLayer<>();
     }
 
 }
