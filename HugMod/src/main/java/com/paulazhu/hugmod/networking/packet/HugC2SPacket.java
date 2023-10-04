@@ -20,17 +20,19 @@ import java.util.function.Supplier;
 
 public class HugC2SPacket {
     private static final String MESSAGE_HUG_SOMEONE = "*hug*";
+    private static final String MESSAGE_GOT_HUGGED = "*hug* received";
+    public final UUID entityHuggedUUID;
 
-    public HugC2SPacket() {
-
+    public HugC2SPacket(UUID clientEntityHuggedUUID) {
+        this.entityHuggedUUID = clientEntityHuggedUUID;
     }
 
     public HugC2SPacket(FriendlyByteBuf buf) {
-
+        this(buf.readUUID());
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
-
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeUUID(this.entityHuggedUUID);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
@@ -42,7 +44,7 @@ public class HugC2SPacket {
 
             player.sendSystemMessage(Component.translatable(MESSAGE_HUG_SOMEONE).withStyle(ChatFormatting.YELLOW));
 
-            // increase hugger's own health
+            // increase hugger players own health
             if (player.getHealth() != 20) {
                 int heartHealAmount = 1;
                 int health = (int) (player.getHealth() + heartHealAmount);
@@ -51,7 +53,7 @@ public class HugC2SPacket {
             }
 
             // for the hugged entity
-            Entity huggedEntity = level.getEntity(UUID.fromString(ClientEvents.entityHuggedUUID));
+            Entity huggedEntity = level.getEntity(this.entityHuggedUUID);
 
             if (huggedEntity.getType() == EntityType.PLAYER) {
                 // increase other player's health
@@ -60,6 +62,7 @@ public class HugC2SPacket {
                     float heartHealAmount = 2;
                     float health = (float) (huggedPlayer.getHealth() + heartHealAmount);
                     huggedPlayer.setHealth(Math.min(health, 20));
+                    huggedPlayer.sendSystemMessage(Component.translatable(MESSAGE_GOT_HUGGED).withStyle(ChatFormatting.YELLOW));
                 }
             } else if (huggedEntity.getType() == EntityType.VILLAGER) {
                 // increase villager's health

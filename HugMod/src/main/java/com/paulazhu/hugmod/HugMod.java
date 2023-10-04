@@ -62,6 +62,7 @@ public class HugMod
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     //This method will set your mods animation into the library.
     private static IAnimation registerPlayerAnimation(AbstractClientPlayer player) {
         //This will be invoked for every new player
