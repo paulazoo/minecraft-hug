@@ -43,11 +43,6 @@ public class HugMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            //Set the player construct callback. It can be a lambda function.
-            PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(
-                    new ResourceLocation(MODID, "animation"),
-                    42,
-                    HugMod::registerPlayerAnimation);
         }
     }
 
