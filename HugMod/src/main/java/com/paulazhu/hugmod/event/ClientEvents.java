@@ -17,9 +17,11 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.UUID;
+
 public class ClientEvents {
     public static boolean isHugging = false;
-    public static String entityHuggedUUID = null;
+    public static UUID entityHuggedUUID = null;
 
     @Mod.EventBusSubscriber(modid = HugMod.MODID, value = Dist.CLIENT)
     public static class ClientForgeEvents {
@@ -36,8 +38,8 @@ public class ClientEvents {
                         en -> (!en.isSpectator()), d);
                 if(entHit != null) {
                     isHugging = true;
-                    ModMessages.sendToServer(new HugC2SPacket());
-                    entityHuggedUUID = String.valueOf(entHit.getEntity().getUUID());
+                    entityHuggedUUID = entHit.getEntity().getUUID();
+                    ModMessages.sendToServer(new HugC2SPacket(entityHuggedUUID));
                 }
             }
         }

@@ -30,7 +30,7 @@ public class ModMessages {
 
         net.messageBuilder(HugC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(HugC2SPacket::new)
-                .encoder(HugC2SPacket::toBytes)
+                .encoder(HugC2SPacket::encode)
                 .consumerMainThread(HugC2SPacket::handle)
                 .add();
     }

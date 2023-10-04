@@ -45,16 +45,13 @@ Minecraft mod to hug players and animals and other entities written in Java with
     - education license/email gives Ultimate for free
 - Forge 1.20 46.0.12 MDK
 
-# Troubleshooting 230630:
-
-## Java versions (1.19.x minecraft is ok at finding this though):
-- /usr/libexec/java_home -V
-- make default: export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`
-- java -version
-
 ## UPDATING TO FORGE 1.20 (231001)
 - change mappings to 1.20
 - dependencies:
     - change forge
     - https://maven.kosmx.dev/dev/kosmx/player-anim/
     - mods.toml versionRange
+
+## TODO:
+- https://www.sportskeeda.com/minecraft/full-list-minecraft-mobs-health
+- serverside animations
