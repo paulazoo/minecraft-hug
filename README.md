@@ -11,7 +11,6 @@ Minecraft mod to hug players and animals and other entities written in Java with
 - To hug shorter animals, try using sneak and looking down at them
 - Hugging increases the health of the player actively doing the hugging by 1/2 of a heart
 - Being hugged increases a player's health by 1 heart
-
 - Hugging a villager will also increase the villager's health by 1 heart
 - yay
 
