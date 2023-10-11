@@ -6,11 +6,14 @@ Minecraft mod to hug players and animals and other entities written in Java with
 
 # Use
 - jar file in build/libs/
-- Press keySwapOffHand while empty handed to use
+- As default, press "O" key to use; custom key bind can be set in options
 - Must be standing right in front of another entity to use
 - To hug shorter animals, try using sneak and looking down at them
 - Hugging increases the health of the player actively doing the hugging by 1/2 of a heart
 - Being hugged increases a player's health by 1 heart
+
+- Hugging a villager will also increase the villager's health by 1 heart
+- yay
 
 # To run in dev:
 - don't need to close IntelliJ
